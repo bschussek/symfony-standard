@@ -1,0 +1,225 @@
+{% block tax_rules_row%}
+{% spaceless %}
+<tbody class="entry-block" id="{{ id }}" rel="{{ value is not empty ? value.id : ''}}">
+<tr class="entry-data" valign="top">
+	<td>
+		<div class="data-country"> {# // Micro format adr (http://microformats.org/wiki/adr) applied #}
+		    {% if value %}
+                {{ value.getCountry() }}
+            {% endif %}
+		</div>
+		<div class="data-region">
+            {% if value %}
+                {{ value.getState() }}
+            {% endif %}
+		</div>
+
+		<span class="data-zip-codes">
+            {{ form.zipCodes.vars.value }}
+		</span>
+	</td>
+	<td>
+		<span class="data-customer-type nowrap">
+            {% set _value = form.customerType.vars.value %}
+            {% if _value %}
+                {{ _value }}
+            {% else %}
+			<span class="disabled">{{ "Any"|trans }}</span>
+			{% endif %}
+		</span>
+	</td>
+	<td>
+		<div class="data-title1">
+            {% for title1 in form.title1 %}
+            {% set _attr = title1.vars.attr %}
+            {% set _value = title1.vars.value %}
+			<div class="b-l10n b-preview-holder locale" lang="{{ _attr.lang }}">
+				<i class="b-flag {{ _attr.lang }}"></i>
+				<span class="b-locale-preview">{{ _value is empty ? "No title"|trans : _value }}</span>
+			</div>
+            {% endfor %}
+		</div>
+		<div class="data-title2">
+            {% for title2 in form.title2 %}
+            {% set _attr = title2.vars.attr %}
+            {% set _value = title2.vars.value %}
+			<div class="b-l10n b-preview-holder locale" lang="{{ _attr.lang }}">
+				<i class="b-flag {{ _attr.lang }}"></i>
+				<span class="b-locale-preview">{{ _value is empty ? "No title"|trans : _value }}</span>
+			</div>
+            {% endfor %}
+		</div>
+	</td>
+	<td class="b-ar">
+		<div class="data-rate1">
+            {{ form.rate1.vars.value }}
+		</div>
+		<div class="data-rate2">
+            {{ form.rate2.vars.value }}
+		</div>
+	</td>
+	<td>
+		<span class="data-compound" {% if form['isCompound'].vars.value != 'true' %}style="display: none"{% endif %}>{{ "Compounded"|trans }}</span>
+	</td>
+</tr>
+<tr class="entry-form" valign="top">
+	<td>
+		<div class="b-fields">
+			<div class="error">{{ form_errors(form.country) }}</div>
+			<dl class="b-field b-field_vertical">
+				<dt>
+					<span>
+                        {{ form_label(form.country) }}
+					</span>
+				</dt>
+				<dd>
+                    {{ form_widget(form.country) }}
+				</dd>
+			</dl>
+
+			<div class="error">{{ form_errors(form.state) }}</div>
+			<dl class="b-field b-field_vertical">
+				<dt>
+					<span>
+                        {{ form_label(form.state) }}
+					</span>
+				</dt>
+				<dd>
+                    {{ form_widget(form.state) }}
+				</dd>
+			</dl>
+
+			<div class="error">{{ form_errors(form.zipCodes) }}</div>
+			<dl class="b-field b-field_vertical">
+				<dt>
+					<span>
+                        {{ form_label(form.zipCodes) }}
+					</span>
+				</dt>
+				<dd>
+                    {{ form_widget(form.zipCodes) }}
+				</dd>
+			</dl>
+		</div>
+	</td>
+	<td>
+		<div class="error">{{ form_errors(form.customerType) }}</div>
+		<dl class="b-field b-field_vertical">
+			<dt>
+				<span>
+                    {{ form_label(form.customerType) }}
+				</span>
+			</dt>
+			<dd>
+                {{ form_widget(form.customerType) }}
+			</dd>
+		</dl>
+	</td>
+	<td>
+		<div class="b-fields">
+			<div class="error">{{ form_errors(form.title1) }}</div>
+			<dl class="b-field b-field_vertical">
+				<dt>
+					<span>
+                        {{ form_label(form.title1) }}
+					</span>
+				</dt>
+				<dd>
+                    {{ form_widget(form.title1) }}
+				</dd>
+			</dl>
+			<div class="error">{{ form_errors(form.title2) }}</div>
+			<dl class="b-field b-field_vertical">
+				<dt>
+					<span>
+                        {{ form_label(form.title2) }}
+					</span>
+				</dt>
+				<dd>
+                    {{ form_widget(form.title2) }}
+				</dd>
+			</dl>
+			<div>
+				<div class="error">{{ form_errors(form.isCompound) }}</div>
+				<div class="b-choice">
+                    {{ form_widget(form.isCompound) }}
+					<span>
+                        {{ form_label(form.isCompound) }} <span></span>
+					</span>
+				</div>
+			</div>
+
+		</div>
+	</td>
+	<td class="b-ar">
+		<div class="b-fields">
+			<div class="error">{{ form_errors(form.rate1) }}</div>
+			<dl class="b-field b-field_vertical">
+				<dt>
+					<span>
+                        {{ form_label(form.rate1) }}
+					</span>
+				</dt>
+				<dd>
+                    {{ form_widget(form.rate1) }}
+				</dd>
+			</dl>
+			<div class="error">{{ form_errors(form.rate2) }}</div>
+			<dl class="b-field b-field_vertical">
+				<dt>
+					<span>
+                        {{ form_label(form.rate2) }}
+					</span>
+				</dt>
+				<dd>
+                    {{ form_widget(form.rate2) }}
+				</dd>
+			</dl>
+		</div>
+	</td>
+</tr>
+</tbody>
+{% endspaceless %}
+{% endblock %}
+
+{% block _taxclass_rules_widget %}
+{% spaceless %}
+<div class="error">
+	{{ form_errors(form) }}
+</div>
+<table border="1" class="advanced wide" id="tax-rules" data-prototype="{{ form_row(prototype)|e }}">
+<thead>
+<tr class="titles">
+	<th class="first">
+		<span>Destination</span>
+	</th>
+	<th>
+		<span>Customer Type</span>
+	</th>
+	<th>
+		<span>Tax Title</span>
+	</th>
+	<th>
+		<span>Tax, %</span>
+	</th>
+</tr>
+</thead>
+{% for child in form %}
+    {{ form_row(child) }}
+{% endfor %}
+<tfoot>
+<tr>
+	<td colspan="5" class="first"></td>
+</tr>
+</tfoot>
+</table>
+{% endspaceless %}
+{% endblock %}
+
+{% block countries_widget %}
+{% spaceless %}
+{% for country in entity.getCountries() %}
+<img src="/img/countries/{{ country.getIsoCode2()|lower }}.png" width="16" height="11" title="{{ country.getTitle() }}" alt="{{ country.getTitle() }}" />
+{% endfor %}
+{% endspaceless %}
+{% endblock %}

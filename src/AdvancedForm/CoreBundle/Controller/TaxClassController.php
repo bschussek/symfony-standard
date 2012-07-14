@@ -93,7 +93,7 @@ class TaxClassController extends Controller
 
         $t = microtime(true);
         $result = $this->render(
-            'AdvancedFormCoreBundle:TaxClass:edit.html.php',
+            'AdvancedFormCoreBundle:TaxClass:edit.html.twig',
             array(
                 'form' => $view,
             )

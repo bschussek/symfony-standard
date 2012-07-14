@@ -1,2 +1,9 @@
 parameters:
     templating.helper.slots.class: AdvancedForm\CoreBundle\Helpers\SlotsHelper
+
+services:
+    twig_timer:
+        class: AdvancedForm\CoreBundle\Helpers\TwigHelper
+        public: false
+        tags:
+            - { name: twig.extension }

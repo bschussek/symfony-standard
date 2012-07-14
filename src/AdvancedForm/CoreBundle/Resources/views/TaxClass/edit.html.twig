@@ -1,0 +1,106 @@
+{% extends 'AdvancedFormCoreBundle::layout.html.twig' %}
+
+{% block content %}
+{% form_theme form 'AdvancedFormCoreBundle:TaxClass:theme.html.twig' %}
+
+
+{% set tax_class = form.vars.value %}
+
+{% if tax_class.id is not null and tax_class.id is numeric %}
+    {% set save_url = path('BETaxClassEdit', {'id': tax_class.id})%}
+{% else %}
+    {% set save_url = path('BETaxClassNew')%}
+{% endif %}
+<form class="b-edit-form" action="{{ save_url }}" method="post" {{ form_enctype(form) }}>
+	<div class="b-admin-form">
+
+		<div class="b-module">
+			<div class="b-box b-box_rounded">
+
+				<div class="b-legend">{{ "Internal Information"|trans }}</div>
+				<div class="b-box_inner b-reduce_middle">
+					<div class="error">
+                        {{ form_errors(form) }}
+					</div>
+                    {{ form_widget(form._token) }}
+
+					<div class="error">
+                        {{ form_errors(form.title) }}
+					</div>
+					<dl class="b-defs-list b-defs_indent_middle clearfix">
+						<dt>
+                            {{ form_label(form.title) }}
+						</dt>
+						<dd class="info">Title for you</dd>
+						<dd class="info-layout">
+                            {{ form_widget(form.title) }}
+						</dd>
+					</dl>
+
+					<div class="error">
+                        {{ form_errors(form.description) }}
+					</div>
+					<dl class="b-defs-list b-defs_indent_middle clearfix">
+						<dt>
+                            {{ form_label(form.description) }}
+						</dt>
+						<dd class="info">Description for your colleagues</dd>
+						<dd class="info-layout">
+                            {{ form_widget(form.description) }}
+						</dd>
+					</dl>
+
+					<dl class="b-defs-list b-defs_indent_middle">
+						<dd class="info">Preselect it for new products</dd>
+						<dd class="info-layout">
+							<div class="error">
+                                {{ form_errors(form.defaultForProducts) }}
+							</div>
+							<div class="b-choice">
+                                {{ form_widget(form.defaultForProducts) }}
+                                {{ form_label(form.defaultForProducts) }}
+							</div>
+						</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="b-title">
+			<span class="b-h4">World Taxes</span>
+		</div>
+
+		<div class="b-msg">
+			<div class="b-msg-body b-note">
+				Tax rules are searched in the order they are listed here.
+				<br>
+				Only the first matching rule will be triggered.
+			</div>
+		</div>
+
+        {{ form_widget(form.rules) }}
+
+		<div class="b-control b-control-bottom">
+			<table class="b-control-list wide">
+				<tbody>
+				<tr>
+					<td class="b-control-list-item">
+						<button class="btn btn-action" bhv="save" type="submit">{{ "Save"|trans }}</button>
+						<button class="btn" bhv="cancel">{{ "Cancel"|trans }}</button>
+					</td>
+					<td class="b-control-list-item b-ar">
+						<span class="b-note">
+							{{ "Current class is used for 10 products, 1 shipping method, gift wrapping."|trans }}
+						</span>
+						<a href="{{ path('BETaxClassDelete', {'id': tax_class.id})}}" class="btn btn-delete" bhv="delete">{{ "Delete"|trans }}</a>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</form>
+
+{% endblock %}
