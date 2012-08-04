@@ -17,7 +17,7 @@ class TaxRuleType extends AbstractType {
     }
 
     public function getName() {
-        return 'tax_rules';
+        return 'tax_rule';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options) {

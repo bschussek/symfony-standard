@@ -74,7 +74,7 @@ class TaxClassController extends Controller
 
         /** @var $form \Symfony\Component\Form\Form */
         $t = microtime(true);
-        $form = $this->createForm(new \AdvancedForm\CoreBundle\Form\TaxClassType($em), $taxClass);
+        $form = $this->createForm('tax_class', $taxClass);
         echo sprintf("createForm took %.3f ms<br>", microtime(true) - $t);
 
         if ($request->getMethod() == 'POST') {
@@ -102,7 +102,7 @@ class TaxClassController extends Controller
 
         $t = microtime(true);
         $result = $this->render(
-            'AdvancedFormCoreBundle:TaxClass:edit.html.twig',
+            'AdvancedFormCoreBundle:TaxClass:edit.html.php',
             array(
                 'form' => $view,
             )

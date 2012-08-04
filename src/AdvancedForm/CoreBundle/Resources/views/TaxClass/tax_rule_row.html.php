@@ -7,10 +7,10 @@
 $formHelper = $view['form'];
 
 /** @var $rule \AdvancedForm\CoreBundle\Entity\TaxClassRule */
-$rule = $form->getVar('value');
+$rule = $form->vars['value'];
 $ruleId = 'new';
 ?>
-<tbody class="entry-block" id="<?$form->getVar('id')?>" rel="<?= (!empty($rule)) ? $rule->getId() : '' ?>">
+<tbody class="entry-block" id="<?$form->vars['id']?>" rel="<?= (!empty($rule)) ? $rule->getId() : '' ?>">
 <tr class="entry-data" valign="top">
 	<td>
 		<div class="data-country"> <? // Micro format adr (http://microformats.org/wiki/adr) applied ?>
@@ -25,12 +25,12 @@ $ruleId = 'new';
 		</div>
 
 		<span class="data-zip-codes">
-			<?= $form['zipCodes']->getVar('value') ?>
+			<?= $form['zipCodes']->vars['value'] ?>
 		</span>
 	</td>
 	<td>
 		<span class="data-customer-type nowrap">
-			<? if ($value = $form['customerType']->getVar('value')): ?>
+			<? if ($value = $form['customerType']->vars['value']): ?>
 			<?= $value ?>
 			<? else: ?>
 			<span class="disabled"><?= _("Any") ?></span>
@@ -42,8 +42,8 @@ $ruleId = 'new';
 			<? foreach($form['title1'] as $title1): ?>
 			<? /** @var $title1 \Symfony\Component\Form\FormView */?>
 			<?
-			$attr = $title1->getVar('attr');
-			$value = $title1->getVar('value');
+			$attr = $title1->vars['attr'];
+			$value = $title1->vars['value'];
 			?>
 			<div class="b-l10n b-preview-holder locale" lang="<?=$attr['lang']?>">
 				<i class="b-flag <?=$attr['lang']?>"></i>
@@ -55,8 +55,8 @@ $ruleId = 'new';
 			<? foreach($form['title2'] as $title2): ?>
 			<? /** @var $title2 \Symfony\Component\Form\FormView */?>
 			<?
-			$attr = $title2->getVar('attr');
-			$value = $title2->getVar('value');
+			$attr = $title2->vars['attr'];
+			$value = $title2->vars['value'];
 			?>
 			<div class="b-l10n b-preview-holder locale" lang="<?=$attr['lang']?>">
 				<i class="b-flag <?=$attr['lang']?>"></i>
@@ -67,14 +67,14 @@ $ruleId = 'new';
 	</td>
 	<td class="b-ar">
 		<div class="data-rate1">
-			<?= $form['rate1']->getVar('value') ?>
+			<?= $form['rate1']->vars['value'] ?>
 		</div>
 		<div class="data-rate2">
-			<?= $form['rate2']->getVar('value') ?>
+			<?= $form['rate2']->vars['value'] ?>
 		</div>
 	</td>
 	<td>
-		<span class="data-compound" <? if ($form['isCompound']->getVar('value') !== "true"): ?>style="display: none"<? endif ?>><?= _("Compounded") ?></span>
+		<span class="data-compound" <? if ($form['isCompound']->vars['value'] !== "true"): ?>style="display: none"<? endif ?>><?= _("Compounded") ?></span>
 	</td>
 </tr>
 <tr class="entry-form" valign="top">

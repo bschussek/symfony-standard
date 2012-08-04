@@ -17,7 +17,7 @@ class TaxClassType extends AbstractType {
     }
 
     public function getName() {
-        return 'taxclass';
+        return 'tax_class';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
@@ -44,7 +44,7 @@ class TaxClassType extends AbstractType {
             'allow_add' => true,
             'allow_delete' => true,
             'prototype' => true,
-            'type' => new \AdvancedForm\CoreBundle\Form\TaxRuleType($this->em),
+            'type' => 'tax_rule',
         ));
     }
 

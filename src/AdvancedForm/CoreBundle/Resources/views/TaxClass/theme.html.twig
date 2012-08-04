@@ -1,4 +1,4 @@
-{% block tax_rules_row%}
+{% block tax_rule_row%}
 {% spaceless %}
 <tbody class="entry-block" id="{{ id }}" rel="{{ value is not empty ? value.id : ''}}">
 <tr class="entry-data" valign="top">
@@ -182,7 +182,7 @@
 {% endspaceless %}
 {% endblock %}
 
-{% block _taxclass_rules_widget %}
+{% block _tax_class_rules_widget %}
 {% spaceless %}
 <div class="error">
 	{{ form_errors(form) }}
