@@ -22,18 +22,9 @@ class TaxRuleType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
-        $countryChoices = $this->em
-            ->getRepository('AdvancedForm\CoreBundle\Entity\Country')
-            ->createQueryBuilder('country')->getQuery()->useResultCache(true)->getResult();
-
-        $customerTypeChoices = $this->em
-            ->getRepository('AdvancedForm\CoreBundle\Entity\CustomerType')
-            ->createQueryBuilder('country')->getQuery()->useResultCache(true)->getResult();
-
         $builder->add('country', 'entity', array(
             'class' => 'AdvancedForm\CoreBundle\Entity\Country',
             'required' => false,
-            'choices' => $countryChoices,
             'label' => _("Country"),
             'empty_value' => _("Any"),
             'attr' => array(
@@ -45,7 +36,6 @@ class TaxRuleType extends AbstractType {
         $builder->add('state', 'entity', array(
             'class' => 'AdvancedForm\CoreBundle\Entity\CountryState',
             'required' => false,
-//			'choices' => array(),  // Setting it later when building formView when entity country is available
             'label' => _("State"),
             'empty_value' => _("Any"),
             'attr' => array(
@@ -65,7 +55,6 @@ class TaxRuleType extends AbstractType {
         $builder->add('customerType', 'entity', array(
             'class' => 'AdvancedForm\CoreBundle\Entity\CustomerType',
             'required' => false,
-            'choices' => $customerTypeChoices,
             'label' => _("Customer Type"),
             'empty_value' => _("Any"),
             'attr' => array(

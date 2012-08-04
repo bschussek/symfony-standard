@@ -5,7 +5,7 @@
  */
 ?>
 <? $view->extend('AdvancedFormCoreBundle::layout.html.php') ?>
-<? $view['form']->setTheme($form, array('AdvancedFormCoreBundle:TaxClass', 'AdvancedFormCoreBundle:Form')) ?>
+<? $view['form']->setTheme($form, array('AdvancedFormCoreBundle:TaxClass')) ?>
 <?
 $time = time();
 

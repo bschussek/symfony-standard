@@ -55,7 +55,15 @@ class TaxClassController extends Controller
         $session->start();
 
         if (!empty($id) && is_numeric($id)) {
-            $taxClass = $em->getRepository('AdvancedForm\CoreBundle\Entity\TaxClass')->findOneBy(array('id' => $id));
+            $taxClass = $em->getRepository('AdvancedForm\CoreBundle\Entity\TaxClass')
+                ->createQueryBuilder('c')
+                ->select('c, r, co')
+                ->leftJoin('c.rules', 'r')
+                ->leftJoin('r.country' ,'co')
+                ->where('c.id = :id')
+                ->setParameter('id', $id)
+                ->getQuery()
+                ->getOneOrNullResult();
         } else {
             $taxClass = new \AdvancedForm\CoreBundle\Entity\TaxClass();
         }
