@@ -52,6 +52,7 @@ class TaxClassController extends Controller
         $request = $this->getRequest();
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
+        $session->start();
 
         if (!empty($id) && is_numeric($id)) {
             $taxClass = $em->getRepository('AdvancedForm\CoreBundle\Entity\TaxClass')->findOneBy(array('id' => $id));
@@ -69,7 +70,7 @@ class TaxClassController extends Controller
         echo sprintf("createForm took %.3f ms<br>", microtime(true) - $t);
 
         if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
+            $form->bind($request);
             if ($form->isValid()) {
 
                 /** @var $rule \AdvancedForm\CoreBundle\Entity\TaxClassRule */
