@@ -2,9 +2,9 @@ parameters:
     database_driver:   pdo_mysql
     database_host: localhost
     database_port:
-    database_name: advanced_form
-    database_user: denisdev
-    database_password: ~
+    database_name: sfsandbox
+    database_user: sfsandbox
+    database_password: sfsandbox
 
     mailer_transport:  smtp
     mailer_host:       localhost
